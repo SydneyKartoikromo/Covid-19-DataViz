@@ -1,4 +1,6 @@
 library(dplyr)
+covid <- read.csv("https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.csv",
+                  stringsAsFactors = FALSE, sep = ";")
 covid <- tbl_df(covid)
 covid <- covid %>% mutate(Date = as.Date(Date_of_report))
 
