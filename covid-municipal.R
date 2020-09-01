@@ -5,17 +5,8 @@ covid <- tbl_df(covid)
 covid <- covid %>% mutate(Date = as.Date(Date_of_report))
 
 zuidholland <- covid %>% filter(Province == "Zuid-Holland" & Municipality_name != "") 
-
-latest <- c()
-if(weekdays(Sys.Date()) == "zaterdag") {
-  latest <- Sys.Date() - 1
-} else if(weekdays(Sys.Date()) == "zondag") {
-  latest <- Sys.Date() - 2
-} else {
-  latest <- Sys.Date()
-}
                   
-top5 <- head(zuidholland %>% filter(Date == latest) %>% arrange(desc(Deceased)) %>%
+top5 <- head(zuidholland %>% filter(Date == max(Date)) %>% arrange(desc(Deceased)) %>%
                 select(Municipality_name), 5)
 top5 <- pull(top5, Municipality_name)
 
